@@ -7,7 +7,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths' // https://vitejs.dev/config
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    sourcemap: false,
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
