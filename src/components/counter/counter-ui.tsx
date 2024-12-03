@@ -2,7 +2,7 @@ import { Keypair, PublicKey } from '@solana/web3.js'
 import { useMemo } from 'react'
 import { ExplorerLink } from '../cluster/cluster-ui'
 import { ellipsify } from '../ui/ui-layout'
-import { useSolanaProgram, useSolanaProgramAccount } from './solana-data-access'
+import { useSolanaProgram, useSolanaProgramAccount } from './counter-data-access'
 
 export function SolanaCreate() {
   const { initialize } = useSolanaProgram()
