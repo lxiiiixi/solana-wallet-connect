@@ -5,20 +5,21 @@ import { Navigate, RouteObject, useRoutes } from 'react-router-dom'
 const AccountListFeature = lazy(() => import('../components/account/account-list-feature'))
 const AccountDetailFeature = lazy(() => import('../components/account/account-detail-feature'))
 const ClusterFeature = lazy(() => import('../components/cluster/cluster-feature'))
-const SolanaFeature = lazy(() => import('../components/solana/solana-feature'))
 const DashboardFeature = lazy(() => import('../components/dashboard/dashboard-feature'))
+const ConnectWalletFeature = lazy(() => import('../components/connect-wallet/connect-wallet-feature'))
 
 const links: { label: string; path: string }[] = [
   { label: 'Account', path: '/account' },
   { label: 'Clusters', path: '/clusters' },
   { label: 'Solana Program', path: '/solana' },
+  { label: 'Connect Wallet', path: '/connect' },
 ]
 
 const routes: RouteObject[] = [
   { path: '/account/', element: <AccountListFeature /> },
   { path: '/account/:address', element: <AccountDetailFeature /> },
-  { path: '/solana', element: <SolanaFeature /> },
   { path: '/clusters', element: <ClusterFeature /> },
+  { path: '/connect', element: <ConnectWalletFeature /> },
 ]
 
 export function AppRoutes() {

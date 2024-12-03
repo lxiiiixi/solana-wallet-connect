@@ -17,6 +17,8 @@ import {
 export function AccountBalance({ address }: { address: PublicKey }) {
   const query = useGetBalance({ address })
 
+  console.log(query.data)
+
   return (
     <div>
       <h1 className="text-5xl font-bold cursor-pointer" onClick={() => query.refetch()}>

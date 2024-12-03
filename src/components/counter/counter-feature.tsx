@@ -2,8 +2,8 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { ExplorerLink } from '../cluster/cluster-ui'
 import { WalletButton } from '../solana/solana-provider'
 import { AppHero, ellipsify } from '../ui/ui-layout'
-import { useSolanaProgram } from './solana-data-access'
-import { SolanaCreate, SolanaList } from './solana-ui'
+import { useSolanaProgram } from './counter-data-access'
+import { SolanaCreate, SolanaList } from './counter-ui'
 
 export default function SolanaFeature() {
   const { publicKey } = useWallet()
