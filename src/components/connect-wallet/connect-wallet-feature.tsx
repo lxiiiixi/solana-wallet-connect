@@ -1,6 +1,6 @@
 import { AppHero } from '../ui/ui-layout'
-import { ParticleConnectkit } from './kit/particle-connect-kit'
-import ParticleConnect from './particle-connect'
+// import { ParticleConnectkit } from './kit/particle-connect-kit'
+// import ParticleConnect from './particle-connect'
 
 export default function SolanaFeature() {
   return (
@@ -13,9 +13,10 @@ export default function SolanaFeature() {
       >
         <div className="flex flex-col justify-center gap-8 min-h-[400px]">
           <div className="bg-pink-50 w-full rounded-xl p-4">
-            <ParticleConnectkit>
+            {/* <ParticleConnectkit>
               <ParticleConnect />
-            </ParticleConnectkit>
+            </ParticleConnectkit> */}
+            particle connectkit
           </div>
           <div className="bg-orange-50 w-full rounded-xl p-4">privy</div>
         </div>

@@ -16,7 +16,6 @@ export default defineConfig({
             '@solana/wallet-adapter-base',
             '@solana/wallet-adapter-react',
             '@solana/wallet-adapter-react-ui',
-            '@coral-xyz/anchor',
           ],
           jotai: ['jotai'],
           react: ['react', 'react-dom'],
@@ -28,7 +27,7 @@ export default defineConfig({
           //   '@solana/wallet-adapter-react',
           //   '@solana/wallet-adapter-react-ui',
           // ],
-          // coral: ['@coral-xyz/anchor'],
+          coral: ['@coral-xyz/anchor'],
           tabler: ['@tabler/icons-react'],
           tanstack: ['@tanstack/react-query'],
         },
@@ -39,6 +38,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   optimizeDeps: {
+    // exclude: ['@particle-network/connectkit'],
     esbuildOptions: {
       plugins: [
         NodeGlobalsPolyfillPlugin({
@@ -47,5 +47,5 @@ export default defineConfig({
       ],
     },
   },
-  plugins: [viteTsconfigPaths(), react(), nodePolyfills()],
+  plugins: [nodePolyfills(), viteTsconfigPaths(), react()],
 })
