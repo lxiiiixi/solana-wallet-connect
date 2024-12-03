@@ -11,17 +11,24 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          coral: ['@coral-xyz/anchor'],
+          solana: [
+            '@solana/web3.js',
+            '@solana/wallet-adapter-base',
+            '@solana/wallet-adapter-react',
+            '@solana/wallet-adapter-react-ui',
+            '@coral-xyz/anchor',
+          ],
           jotai: ['jotai'],
           react: ['react', 'react-dom'],
           reactHotToast: ['react-hot-toast'],
           reactRouter: ['react-router', 'react-router-dom'],
-          solanaWeb3: ['@solana/web3.js'],
-          solanaWalletAdapters: [
-            '@solana/wallet-adapter-base',
-            '@solana/wallet-adapter-react',
-            '@solana/wallet-adapter-react-ui',
-          ],
+          // solanaWeb3: ['@solana/web3.js'],
+          // solanaWalletAdapters: [
+          //   '@solana/wallet-adapter-base',
+          //   '@solana/wallet-adapter-react',
+          //   '@solana/wallet-adapter-react-ui',
+          // ],
+          // coral: ['@coral-xyz/anchor'],
           tabler: ['@tabler/icons-react'],
           tanstack: ['@tanstack/react-query'],
         },
