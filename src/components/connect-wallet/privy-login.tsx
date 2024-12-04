@@ -70,7 +70,7 @@ export default function PrivyLogin() {
             </button>
           </div>
 
-          <Buy userWalletPublicKey={solanaWallet?.address} sendSolanaTransaction={sendSolanaTransaction} />
+          <Buy userWalletPublicKey={solanaWallet?.address} />
           <hr className="my-10" />
 
           <div className="mt-10 flex gap-4 flex-wrap">

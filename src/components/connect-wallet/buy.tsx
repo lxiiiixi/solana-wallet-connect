@@ -2,7 +2,7 @@
 import { clusterApiUrl, Connection, VersionedTransaction } from '@solana/web3.js'
 // import { Wallet } from '@project-serum/anchor'
 import fetch from 'cross-fetch'
-import { useSolanaWallets, type SendTransactionModalUIOptions } from '@privy-io/react-auth'
+import { useSolanaWallets } from '@privy-io/react-auth'
 // import bs58 from 'bs58'
 // import { useEffect, useState } from 'react'
 
@@ -70,7 +70,7 @@ async function fetchSwapTransaction(quoteResponse: any, userPublicKey: string) {
  * 执行交易
  * swapTransaction： 一个以 Base64 编码的 Solana 交易数据，一个已经序列化的交易字符串。
  */
-async function executeTransaction(swapTransaction: string, connection: Connection) {
+export async function executeTransaction(swapTransaction: string, connection: Connection) {
   try {
     console.log('🚀 正在反序列化交易...')
     const swapTransactionBuf = Buffer.from(swapTransaction, 'base64') // 转换为 Buffer，这是处理二进制的标准方法。
@@ -104,19 +104,7 @@ async function executeTransaction(swapTransaction: string, connection: Connectio
   }
 }
 
-const uiConfig: SendTransactionModalUIOptions = {
-  header: 'Sample header text',
-  description: 'Sample description text',
-  buttonText: 'Sample button text',
-}
-
-export default function Buy({
-  userWalletPublicKey,
-  sendSolanaTransaction,
-}: {
-  userWalletPublicKey?: string
-  sendSolanaTransaction: any
-}) {
+export default function Buy({ userWalletPublicKey }: { userWalletPublicKey?: string }) {
   const { wallets } = useSolanaWallets()
   const solanaWallet = wallets[0]
 
