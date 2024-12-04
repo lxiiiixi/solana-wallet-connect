@@ -10,7 +10,7 @@ const connection = new Connection(RPC_ENDPOINT, 'confirmed');
 // 加载密钥对
 // const secretKey = Buffer.from(process.env.PRIVATE_KEY || '', 'hex');
 // const keypair = Keypair.fromSecretKey(secretKey);
-const userPublicKey = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
+const userPublicKey = "CFG4xvFXamf6RGgfoSdSukgt8gKBF8JiJd3d7Rxvx4EB"; // "CFG4xvFXamf6RGgfoSdSukgt8gKBF8JiJd3d7Rxvx4EB"
 
 /**
  * 获取报价
@@ -57,7 +57,7 @@ async function fetchSwapTransaction(quoteResponse) {
         }
 
         const { swapTransaction } = await response.json();
-        console.log('✅ 获取交换交易成功');
+        console.log('✅ 获取交换交易成功', swapTransaction);
         return swapTransaction;
     } catch (error) {
         console.error('❌ 获取交换交易失败:', error.message);

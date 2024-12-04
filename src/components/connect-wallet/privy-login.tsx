@@ -34,6 +34,7 @@ export default function PrivyLogin() {
     unlinkTwitter,
     linkDiscord,
     unlinkDiscord,
+    sendSolanaTransaction,
   } = usePrivy()
 
   const numAccounts = user?.linkedAccounts?.length || 0
@@ -48,6 +49,9 @@ export default function PrivyLogin() {
   const discordSubject = user?.discord?.subject || null
 
   console.log('user', user)
+
+  const solanaWallet = user?.linkedAccounts.filter((item) => item.chainType && item.chainType === 'solana')[0]
+  console.log(solanaWallet)
 
   return (
     <div>
@@ -66,7 +70,7 @@ export default function PrivyLogin() {
             </button>
           </div>
 
-          <Buy userWalletPublicKey={user?.wallet?.address} />
+          <Buy userWalletPublicKey={solanaWallet?.address} sendSolanaTransaction={sendSolanaTransaction} />
           <hr className="my-10" />
 
           <div className="mt-10 flex gap-4 flex-wrap">

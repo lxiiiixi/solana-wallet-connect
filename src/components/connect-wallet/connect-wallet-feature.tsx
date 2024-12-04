@@ -5,6 +5,13 @@ import { addRpcUrlOverrideToChain, PrivyProvider } from '@privy-io/react-auth'
 import PrivyLogin from './privy-login'
 import { solanaDevnet } from '@particle-network/connectkit/chains'
 
+import { toSolanaWalletConnectors } from '@privy-io/react-auth/solana'
+
+const solanaConnectors = toSolanaWalletConnectors({
+  // By default, shouldAutoConnect is enabled
+  shouldAutoConnect: true,
+})
+
 export default function SolanaFeature() {
   const solanaDevnetOverride = addRpcUrlOverrideToChain(solanaDevnet, 'https://api.devnet.solana.com')
 
@@ -33,7 +40,7 @@ export default function SolanaFeature() {
                   showWalletLoginFirst: false,
                   logo: 'https://auth.privy.io/logos/privy-logo.png',
                   walletChainType: 'solana-only',
-                  walletList: ['detected_solana_wallets', 'phantom'],
+                  walletList: ['phantom'],
                 },
                 // Display email and wallet as login methods
                 loginMethods: ['email', 'wallet', 'google', 'apple', 'github', 'discord'],
@@ -42,10 +49,16 @@ export default function SolanaFeature() {
                     useSandbox: true,
                   },
                 },
+                externalWallets: {
+                  solana: {
+                    connectors: solanaConnectors,
+                  },
+                },
                 // Create embedded wallets for users who don't have a wallet
                 embeddedWallets: {
-                  createOnLogin: 'off',
-                  requireUserPasswordOnCreate: false,
+                  createOnLogin: 'all-users',
+                  // createOnLogin: 'off',
+                  // requireUserPasswordOnCreate: false,
                 },
                 mfa: {
                   noPromptOnMfaRequired: false,
