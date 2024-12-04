@@ -1,4 +1,5 @@
 import { getAccessToken, usePrivy } from '@privy-io/react-auth'
+import Buy from './buy'
 
 // 参考：https://github.com/privy-io/create-next-app/blob/main/pages/index.tsx
 
@@ -33,7 +34,6 @@ export default function PrivyLogin() {
     unlinkTwitter,
     linkDiscord,
     unlinkDiscord,
-    sendSolanaTransaction,
   } = usePrivy()
 
   const numAccounts = user?.linkedAccounts?.length || 0
@@ -47,9 +47,7 @@ export default function PrivyLogin() {
   const twitterSubject = user?.twitter?.subject || null
   const discordSubject = user?.discord?.subject || null
 
-  console.log(user)
-
-  console.log('sendSolanaTransaction', sendSolanaTransaction)
+  console.log('user', user)
 
   return (
     <div>
@@ -68,6 +66,7 @@ export default function PrivyLogin() {
             </button>
           </div>
 
+          <Buy userWalletPublicKey={user?.wallet?.address} />
           <hr className="my-10" />
 
           <div className="mt-10 flex gap-4 flex-wrap">

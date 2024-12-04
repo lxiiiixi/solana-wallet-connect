@@ -44,6 +44,9 @@ importers:
       bs58:
         specifier: ^6.0.0
         version: 6.0.0
+      cross-fetch:
+        specifier: ^4.0.0
+        version: 4.0.0(encoding@0.1.13)
       daisyui:
         specifier: ^4.12.10
         version: 4.12.14(postcss@8.4.49)
