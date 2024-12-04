@@ -33,6 +33,7 @@ export default function PrivyLogin() {
     unlinkTwitter,
     linkDiscord,
     unlinkDiscord,
+    sendSolanaTransaction,
   } = usePrivy()
 
   const numAccounts = user?.linkedAccounts?.length || 0
@@ -46,12 +47,15 @@ export default function PrivyLogin() {
   const twitterSubject = user?.twitter?.subject || null
   const discordSubject = user?.discord?.subject || null
 
+  console.log(user)
+
+  console.log('sendSolanaTransaction', sendSolanaTransaction)
+
   return (
     <div>
       <button className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg" onClick={login}>
         Log in
       </button>
-
       {ready && authenticated ? (
         <>
           <div className="flex flex-row justify-between">
@@ -63,7 +67,10 @@ export default function PrivyLogin() {
               Logout
             </button>
           </div>
-          <div className="mt-12 flex gap-4 flex-wrap">
+
+          <hr className="my-10" />
+
+          <div className="mt-10 flex gap-4 flex-wrap">
             {googleSubject ? (
               <button
                 onClick={() => {

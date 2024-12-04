@@ -1,10 +1,13 @@
 import { AppHero } from '../ui/ui-layout'
 // import { ParticleConnectkit } from './kit/particle-connect-kit'
 // import ParticleConnect from './particle-connect'
-import { PrivyProvider } from '@privy-io/react-auth'
+import { addRpcUrlOverrideToChain, PrivyProvider } from '@privy-io/react-auth'
 import PrivyLogin from './privy-login'
+import { solanaDevnet } from '@particle-network/connectkit/chains'
 
 export default function SolanaFeature() {
+  const solanaDevnetOverride = addRpcUrlOverrideToChain(solanaDevnet, 'https://api.devnet.solana.com')
+
   return (
     <div>
       <AppHero
@@ -34,7 +37,6 @@ export default function SolanaFeature() {
                 },
                 // Display email and wallet as login methods
                 loginMethods: ['email', 'wallet', 'google', 'apple', 'github', 'discord'],
-
                 fundingMethodConfig: {
                   moonpay: {
                     useSandbox: true,
@@ -48,6 +50,7 @@ export default function SolanaFeature() {
                 mfa: {
                   noPromptOnMfaRequired: false,
                 },
+                supportedChains: [solanaDevnetOverride],
               }}
             >
               <PrivyLogin />
