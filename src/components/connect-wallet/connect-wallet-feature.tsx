@@ -1,6 +1,6 @@
 import { AppHero } from '../ui/ui-layout'
-// import { ParticleConnectkit } from './kit/particle-connect-kit'
-// import ParticleConnect from './particle-connect'
+import { ParticleConnectkit } from './kit/particle-connect-kit'
+import ParticleConnect from './particle-connect'
 import { addRpcUrlOverrideToChain, PrivyProvider } from '@privy-io/react-auth'
 import PrivyLogin from './privy-login'
 import { solanaDevnet } from '@particle-network/connectkit/chains'
@@ -25,10 +25,10 @@ export default function SolanaFeature() {
       >
         <div className="flex flex-col justify-center gap-8 min-h-[400px]">
           <div className="bg-pink-50 w-full rounded-xl p-4">
-            {/* <ParticleConnectkit>
+            <ParticleConnectkit>
               <ParticleConnect />
-            </ParticleConnectkit> */}
-            particle connectkit
+            </ParticleConnectkit>
+            {/* particle connectkit */}
           </div>
           <div className="bg-orange-50 w-full rounded-xl p-4">
             <PrivyProvider
@@ -36,11 +36,17 @@ export default function SolanaFeature() {
               config={{
                 appearance: {
                   accentColor: '#6A6FF5',
-                  theme: '#FFFFFF',
-                  showWalletLoginFirst: false,
-                  logo: 'https://auth.privy.io/logos/privy-logo.png',
-                  walletChainType: 'solana-only',
-                  walletList: ['phantom'],
+                  theme: '#fbe9e9',
+                  logo: undefined,
+                  // logo: (
+                  //   <img src="https://auth.privy.io/logos/privy-logo.png" alt="privy-logo" style={{ width: '10px' }} />
+                  // ),
+                  // logo: 'https://auth.privy.io/logos/privy-logo.png',
+                  landingHeader: 'Connect wallet',
+                  showWalletLoginFirst: false, // 是否有限展示钱包链接的方式
+                  loginMessage: 'Welcome to the app',
+                  walletChainType: 'solana-only', // 展示支持链的钱包类型
+                  walletList: ['phantom', 'metamask', 'okx_wallet'], // 可以选择的钱包列表 WalletListEntry
                 },
                 // Display email and wallet as login methods
                 loginMethods: ['email', 'wallet', 'google', 'apple', 'github', 'discord'],

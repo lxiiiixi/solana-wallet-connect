@@ -37,6 +37,9 @@ export default function ParticleConnect() {
   const executeTx = async () => {
     try {
       const publicKey = solanaWallet.publicKey
+      console.log('🚀 ~ executeTx ~ publicKey:', solanaWallet)
+
+      return
 
       // Prepare the transaction object
       const tx = new Transaction()

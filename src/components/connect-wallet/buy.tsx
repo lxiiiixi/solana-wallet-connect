@@ -115,7 +115,7 @@ export default function Buy({ userWalletPublicKey }: { userWalletPublicKey?: str
 
     const inputMint = 'So11111111111111111111111111111111111111112' // SOL Mint
     const outputMint = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' // USDC Mint
-    const amount = 1000000000 // 0.1 SOL in lamports
+    const amount = 10000000 // 0.1 SOL in lamports  decimals-9
     const slippageBps = 50 // 0.5% 滑点
     const connection = new Connection(clusterApiUrl('mainnet-beta'))
 
