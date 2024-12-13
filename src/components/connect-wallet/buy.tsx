@@ -2,7 +2,7 @@
 import { clusterApiUrl, Connection, VersionedTransaction } from '@solana/web3.js'
 // import { Wallet } from '@project-serum/anchor'
 import fetch from 'cross-fetch'
-import { useSolanaWallets } from '@privy-io/react-auth'
+import { useDelegatedActions, useSolanaWallets } from '@privy-io/react-auth'
 // import bs58 from 'bs58'
 // import { useEffect, useState } from 'react'
 
@@ -17,7 +17,7 @@ async function fetchQuote(
   excludeDexes = [],
 ) {
   try {
-    console.log('🚀 正在获取报价...')
+    console.log('🚀 正在调用api获取报价 ——————————————————————————————————')
     const excludeDexesParam = excludeDexes.length > 0 ? `&excludeDexes=${excludeDexes.join(',')}` : ''
     const quoteUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=${slippageBps}${excludeDexesParam}`
     const response = await fetch(quoteUrl)
@@ -106,12 +106,18 @@ export async function executeTransaction(swapTransaction: string, connection: Co
 
 export default function Buy({ userWalletPublicKey }: { userWalletPublicKey?: string }) {
   const { wallets } = useSolanaWallets()
+  const { delegateWallet } = useDelegatedActions()
+
   const solanaWallet = wallets[0]
+  const embedSolanaWallet = wallets[1]
+  console.log('🚀 ~ Buy ~ solanaWallet:', embedSolanaWallet, solanaWallet)
 
   const handleBuy = async () => {
     if (!userWalletPublicKey) {
       return
     }
+
+    console.time('✅ 所有流程完成!')
 
     const inputMint = 'So11111111111111111111111111111111111111112' // SOL Mint
     const outputMint = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' // USDC Mint
@@ -119,23 +125,42 @@ export default function Buy({ userWalletPublicKey }: { userWalletPublicKey?: str
     const slippageBps = 50 // 0.5% 滑点
     const connection = new Connection(clusterApiUrl('mainnet-beta'))
 
-    console.log('💡 开始交易流程...')
-
+    console.log('💡 开始交易流程 ——————————————————————————————————')
+    console.time('⏱️ 获取报价耗时')
     const quote = await fetchQuote(inputMint, outputMint, amount, slippageBps)
-    const swapTransaction = await fetchSwapTransaction(quote, userWalletPublicKey)
-    // const txid = await executeTransaction(swapTransaction, connection)
-    // console.log(`🎉 交易完成，交易 ID: ${txid}`)
+    console.timeEnd('⏱️ 获取报价耗时')
 
-    console.log('🚀 正在反序列化交易...')
+    console.time('⏱️ 获取交换交易耗时')
+    const swapTransaction = await fetchSwapTransaction(quote, userWalletPublicKey)
+    console.timeEnd('⏱️ 获取交换交易耗时')
+
+    console.log('🚀 开始反序列化交易 ——————————————————————————————————')
+    console.time('⏱️ 反序列化耗时')
     const swapTransactionBuf = Buffer.from(swapTransaction, 'base64')
     const transaction = VersionedTransaction.deserialize(swapTransactionBuf)
+    console.timeEnd('⏱️ 反序列化耗时')
 
-    await solanaWallet.sendTransaction(transaction, connection)
+    console.time('⏱️ 发送交易耗时')
+    const res = await solanaWallet.sendTransaction(transaction, connection)
+    console.timeEnd('⏱️ 发送交易耗时')
+    console.log('🚀 ~ Buy ~ res:', res)
+
+    console.time('✅ 所有流程完成!')
   }
 
   return (
-    <button className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg" onClick={handleBuy}>
-      buy
-    </button>
+    <div className="flex justify-center items-center flex-row gap-4">
+      <button
+        className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg"
+        onClick={() => {
+          delegateWallet({ address: embedSolanaWallet.address, chainType: 'solana' })
+        }}
+      >
+        Approve
+      </button>
+      <button className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg" onClick={handleBuy}>
+        buy
+      </button>
+    </div>
   )
 }
